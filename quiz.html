@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domath | تحدي الدرس</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo"><span class="logo-bold">Do</span><span class="logo-light">math</span></div>
+        <nav class="nav-links"><a href="index.html">الرئيسية</a><a href="courses.html" class="active">المقررات</a></nav>
+        <div class="user-profile"><div class="points-badge"><span>نقاطك:</span><span id="global-score">0</span><span>⭐</span></div></div>
+    </header>
+
+    <main>
+        <section class="page-header courses-header" style="background: linear-gradient(135deg, #ff6b6b, #ff8e53);">
+            <h1 id="lesson-title-display">جاري تحميل التحدي...</h1>
+            <p>أجب عن الأسئلة بتركيز لتجمع أكبر عدد من النقاط!</p>
+        </section>
+
+        <div class="container">
+            <div class="quiz-page-container">
+                
+                <div id="quiz-content">
+                    </div>
+
+                <div id="final-result" class="final-result">
+                    <h3>🎉 بطل الرياضيات! 🎉</h3>
+                    <p>لقد أنهيت التحدي بنجاح وكسبت نقاطاً جديدة.</p><br>
+                    <a href="courses.html" class="btn btn-primary">العودة للمقررات</a>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>جميع الحقوق محفوظة © منصة Domath التعليمية | بإشراف أ. بشاير العمري</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <script>
+        // بنك الأسئلة الشامل لجميع الدروس الـ 24
+        const quizData = {
+            // ================= الفصل الدراسي الأول =================
+            "1": {
+                title: "القيمة المنزلية ضمن مئات الألوف",
+                questions: [
+                    { q: "ما هي القيمة المنزلية للرقم 5 في العدد 452,100؟", options: ["5,000", "50,000", "500"], correct: 1 },
+                    { q: "العدد 300,000 + 40,000 + 5,000 يكتب بالصيغة القياسية:", options: ["345,000", "304,500", "340,500"], correct: 0 }
+                ]
+            },
+            "2": {
+                title: "القيمة المنزلية ضمن الملايين",
+                questions: [
+                    { q: "كيف يكتب العدد 'ثلاثة ملايين وخمسون ألفاً' بالأرقام؟", options: ["3,050,000", "3,500,000", "3,000,050"], correct: 0 },
+                    { q: "القيمة المنزلية للرقم 7 في العدد 7,123,456 هي:", options: ["700,000", "7,000,000", "70,000"], correct: 1 }
+                ]
+            },
+            "3": {
+                title: "المقارنة بين الأعداد الكلية",
+                questions: [
+                    { q: "أي الرموز التالية يجعل العبارة صحيحة: 5,432 [ ] 5,423", options: [">", "<", "="], correct: 0 },
+                    { q: "أي الأعداد التالية هو الأكبر؟", options: ["12,450", "12,540", "12,405"], correct: 1 }
+                ]
+            },
+            "4": {
+                title: "ترتيب الأعداد الكلية",
+                questions: [
+                    { q: "الترتيب الصحيح للأعداد ( 150 - 105 - 510 ) من الأصغر للأكبر هو:", options: ["105, 150, 510", "150, 105, 510", "510, 150, 105"], correct: 0 },
+                    { q: "عند ترتيب الأعداد تصاعدياً، نبدأ بالعدد:", options: ["الأكبر", "الأصغر", "المتوسط"], correct: 1 }
+                ]
+            },
+            "5": {
+                title: "تقريب الأعداد الكلية",
+                questions: [
+                    { q: "قرّب العدد 4,672 إلى أقرب ألف:", options: ["4,000", "5,000", "4,700"], correct: 1 },
+                    { q: "عند تقريب العدد 34 إلى أقرب عشرة يصبح:", options: ["30", "40", "35"], correct: 0 }
+                ]
+            },
+            "6": {
+                title: "خصائص الجمع وقواعد الطرح",
+                questions: [
+                    { q: "الخاصية المستخدمة في ( 5 + 3 = 3 + 5 ) هي خاصية:", options: ["التجميع", "الإبدال", "العنصر المحايد"], correct: 1 },
+                    { q: "أي عدد تجمعه مع الصفر يساوي العدد نفسه، تسمى هذه الخاصية:", options: ["العنصر المحايد", "الإبدال", "التجميع"], correct: 0 }
+                ]
+            },
+            "7": {
+                title: "تقدير المجموع والفرق",
+                questions: [
+                    { q: "قدر ناتج 42 + 27 لأقرب عشرة:", options: ["60", "80", "70"], correct: 2 },
+                    { q: "قدر ناتج 89 - 31 لأقرب عشرة:", options: ["50", "60", "40"], correct: 1 }
+                ]
+            },
+            "8": {
+                title: "جمع وطرح الأعداد الكلية",
+                questions: [
+                    { q: "ما هو ناتج جمع 450 + 120 ؟", options: ["570", "670", "550"], correct: 0 },
+                    { q: "ما هو ناتج طرح 800 - 300 ؟", options: ["600", "500", "400"], correct: 1 }
+                ]
+            },
+            "9": {
+                title: "الطرح مع وجود الأصفار",
+                questions: [
+                    { q: "ما هو ناتج طرح 500 - 125 ؟", options: ["375", "475", "350"], correct: 0 },
+                    { q: "لإيجاد ناتج 1000 - 450، يجب علينا أولاً:", options: ["الجمع", "إعادة التجميع (الاستلاف)", "الضرب"], correct: 1 }
+                ]
+            },
+            "10": {
+                title: "جمع البيانات وتنظيمها",
+                questions: [
+                    { q: "الأداة المناسبة لتنظيم البيانات بسهولة هي:", options: ["جدول الإشارات", "المسطرة", "الفرجار"], correct: 0 },
+                    { q: "طرح سؤال وجمع الإجابات يسمى:", options: ["مسحاً", "تقريباً", "جمعاً"], correct: 0 }
+                ]
+            },
+            "11": {
+                title: "المنوال والوسيط والقيم المتطرفة",
+                questions: [
+                    { q: "القيمة الأكثر تكراراً في مجموعة من البيانات تسمى:", options: ["الوسيط", "المنوال", "القيمة المتطرفة"], correct: 1 },
+                    { q: "القيمة البعيدة جداً عن بقية القيم تسمى:", options: ["الوسيط", "القيمة المتطرفة", "المتوسط"], correct: 1 }
+                ]
+            },
+            "12": {
+                title: "التمثيل بالنقاط",
+                questions: [
+                    { q: "في التمثيل بالنقاط، نستخدم عادة الرمز:", options: ["دائرة", "مربع", "X"], correct: 2 },
+                    { q: "الأساس الذي يتم رسم التمثيل بالنقاط عليه هو:", options: ["خط الأعداد", "المحور الرأسي", "المربع"], correct: 0 }
+                ]
+            },
+            "13": {
+                title: "قراءة التمثيل بالأعمدة",
+                questions: [
+                    { q: "أطول عمود في الرسم البياني يدل على:", options: ["البيانات الأقل", "البيانات الأكثر", "الوسيط"], correct: 1 },
+                    { q: "المحور الذي تُكتب عليه الأرقام والتدريجات يسمى:", options: ["المحور الرأسي", "المحور الأفقي", "العنوان"], correct: 0 }
+                ]
+            },
+
+            // ================= الفصل الدراسي الثاني =================
+            "14": { 
+                title: "القسمة مع باق",
+                questions: [
+                    { q: "ما هو ناتج قسمة 17 ÷ 5 ؟", options: ["3 والباقي 2", "3 والباقي 1", "4"], correct: 0 },
+                    { q: "إذا وزعنا 22 تفاحة على 4 طلاب بالتساوي، كم تفاحة تتبقى؟", options: ["1", "2", "3"], correct: 1 }
+                ]
+            },
+            "15": { 
+                title: "القسمة على مضاعفات 10/100/1000",
+                questions: [
+                    { q: "ما هو ناتج قسمة 400 ÷ 10 ؟", options: ["4", "40", "400"], correct: 1 },
+                    { q: "عند قسمة 5000 ÷ 100، كم صفراً نحذف من المقسوم؟", options: ["صفر واحد", "صفران", "ثلاثة أصفار"], correct: 1 }
+                ]
+            },
+            "16": { 
+                title: "تقدير ناتج القسمة",
+                questions: [
+                    { q: "قدر ناتج قسمة 124 ÷ 4 (استخدم 120 كأقرب مضاعف):", options: ["30", "40", "20"], correct: 0 },
+                    { q: "التقدير الأنسب لناتج 358 ÷ 6 هو:", options: ["50", "60", "70"], correct: 1 }
+                ]
+            },
+            "17": { 
+                title: "الأشكال الثلاثية الأبعاد",
+                questions: [
+                    { q: "مجسم له 6 أوجه مربعة متطابقة، هو:", options: ["المكعب", "الهرم", "الأسطوانة"], correct: 0 },
+                    { q: "المجسم الذي ليس له رؤوس ولا أحرف هو:", options: ["المخروط", "الكرة", "المنشور"], correct: 1 }
+                ]
+            },
+            "18": { 
+                title: "الأشكال الثنائية الأبعاد",
+                questions: [
+                    { q: "المضلع الذي له 5 أضلاع يسمى مضلعاً:", options: ["سداسياً", "خماسياً", "رباعياً"], correct: 1 },
+                    { q: "الشكل الثنائي الأبعاد هو شكل له:", options: ["طول وعرض فقط", "طول وعرض وارتفاع", "حجم"], correct: 0 }
+                ]
+            },
+            "19": { 
+                title: "الزوايا",
+                questions: [
+                    { q: "الزاوية التي قياسها 90 درجة تسمى زاوية:", options: ["حادة", "قائمة", "منفرجة"], correct: 1 },
+                    { q: "الزاوية الحادة هي الزاوية التي قياسها:", options: ["أقل من 90", "أكبر من 90", "تساوي 180"], correct: 0 }
+                ]
+            },
+            "20": { 
+                title: "المثلثات",
+                questions: [
+                    { q: "مجموع زوايا أي مثلث يساوي:", options: ["90 درجة", "180 درجة", "360 درجة"], correct: 1 },
+                    { q: "المثلث الذي جميع أضلاعه مختلفة الطول يسمى:", options: ["متطابق الأضلاع", "متطابق الضلعين", "مختلف الأضلاع"], correct: 2 }
+                ]
+            },
+            "21": { 
+                title: "الأشكال الرباعية",
+                questions: [
+                    { q: "شكل رباعي جميع أضلاعه متطابقة وزواياه الأربع قائمة:", options: ["المستطيل", "المربع", "المعين"], correct: 1 },
+                    { q: "شكل رباعي فيه كل ضلعين متقابلين متوازيان ومتطابقان:", options: ["متوازي الأضلاع", "شبه المنحرف", "المثلث"], correct: 0 }
+                ]
+            },
+            "22": { 
+                title: "المستوى الإحداثي",
+                questions: [
+                    { q: "نقطة الأصل في المستوى الإحداثي هي:", options: ["(1,1)", "(0,1)", "(0,0)"], correct: 2 },
+                    { q: "الزوج المرتب يُكتب دائماً على الصورة:", options: ["(س, ص)", "(ص, س)", "(ص, ص)"], correct: 0 }
+                ]
+            },
+            "23": { 
+                title: "الكسور الاعتيادية بوصفها أجزاء من الكل",
+                questions: [
+                    { q: "الكسر الذي يمثل نصف الشيء يكتب:", options: ["1/3", "1/4", "1/2"], correct: 2 },
+                    { q: "في الكسر 3/4 ، ماذا يسمى الرقم 4؟", options: ["البسط", "المقام", "الناتج"], correct: 1 }
+                ]
+            },
+            "24": { 
+                title: "جمع وطرح الكسور الاعتيادية المتشابهة",
+                questions: [
+                    { q: "ما ناتج جمع الكسرين ( 1/5 + 2/5 ) ؟", options: ["3/10", "3/5", "2/5"], correct: 1 },
+                    { q: "ما ناتج طرح الكسرين ( 4/7 - 1/7 ) ؟", options: ["3/0", "5/7", "3/7"], correct: 2 }
+                ]
+            }
+        };
+
+        const urlParams = new URLSearchParams(window.location.search);
+        let lessonId = urlParams.get('lesson');
+        const quizContainer = document.getElementById('quiz-content');
+        
+        if (!quizData[lessonId]) {
+            document.getElementById('lesson-title-display').innerText = "درس قيد التجهيز";
+            quizContainer.innerHTML = `
+                <div style="text-align: center; padding: 40px;">
+                    <h3 style="color: var(--accent-color); font-size: 24px; margin-bottom: 15px;">⏳ الأسئلة قيد التجهيز</h3>
+                    <p style="font-size: 18px; color: #555;">تعمل الأستاذة بشاير على تجهيز أسئلة وتحديات ممتعة لهذا الدرس، عد قريباً!</p>
+                    <a href="courses.html" class="btn btn-primary" style="margin-top: 20px; display: inline-block;">العودة للمقررات</a>
+                </div>
+            `;
+        } else {
+            const currentLesson = quizData[lessonId];
+            document.getElementById('lesson-title-display').innerText = "تحدي: " + currentLesson.title;
+
+            let questionsHtml = "";
+            currentLesson.questions.forEach((question, index) => {
+                let optionsHtml = "";
+                question.options.forEach((opt, optIndex) => {
+                    let isCorrect = (optIndex === question.correct) ? "true" : "false";
+                    optionsHtml += `<button class="option-btn" onclick="answerQuestion(this, 'q${index}', ${isCorrect})">${opt}</button>`;
+                });
+
+                questionsHtml += `
+                    <div class="question-block" id="q${index}">
+                        <div class="question-text">${index + 1}. ${question.q}</div>
+                        <div class="options-grid">${optionsHtml}</div>
+                        <div class="feedback-message"></div>
+                    </div>
+                `;
+            });
+
+            quizContainer.innerHTML = questionsHtml;
+
+            let questionsAnswered = 0;
+            const totalQuestions = currentLesson.questions.length;
+
+            window.answerQuestion = function(btn, qId, isCorrect) {
+                const qBlock = document.getElementById(qId);
+                if (qBlock.getAttribute('data-done') === 'true') return;
+                qBlock.setAttribute('data-done', 'true');
+                questionsAnswered++;
+
+                const feedback = qBlock.querySelector('.feedback-message');
+                const allBtns = qBlock.querySelectorAll('.option-btn');
+
+                if (isCorrect) {
+                    btn.style.background = '#2ed573'; btn.style.borderColor = '#2ed573'; btn.style.color = '#fff';
+                    feedback.innerText = 'إجابة صحيحة! +20 نقطة 🌟'; feedback.style.color = '#2ed573';
+                    
+                    // استخدمنا دالة الحفظ الذكية هنا بدال الزيادة الوهمية
+                    if (typeof addPoints === 'function') {
+                        addPoints(20);
+                    }
+                } else {
+                    btn.style.background = '#ff4757'; btn.style.borderColor = '#ff4757'; btn.style.color = '#fff';
+                    feedback.innerText = 'إجابة خاطئة! حاول التركيز أكثر.'; feedback.style.color = '#ff4757';
+                }
+
+                allBtns.forEach(b => {
+                    b.style.cursor = 'not-allowed';
+                    if(b.getAttribute('onclick').includes('true')) {
+                        b.style.border = '2px solid #2ed573'; b.style.color = '#2ed573';
+                    }
+                });
+
+                if (questionsAnswered === totalQuestions) {
+                    document.getElementById('final-result').style.display = 'block';
+                }
+            };
+        }
+    </script>
+</body>
+</html>
